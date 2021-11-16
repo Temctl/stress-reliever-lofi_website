@@ -6,7 +6,6 @@ var width;
 var height;
 
 function setup() {
-  sn = new Snowflake;
 
   width = windowWidth;
   height = windowHeight;
@@ -19,9 +18,8 @@ function setup() {
 
   button = createButton('talk');
   button.position(input.x + input.width, height/2)
-  ellipse(50, 50, 50, 50);
 
-  background();
+  //background();
 }
 
 // gonna do responds
@@ -30,24 +28,36 @@ function setup() {
 function draw() {
   //sn.fall();
   
+  let xAxis = float.random(0, width);
+  ellipse(50, 50, 50, 50);
+  let yAxis = float.random(-25, -5);
+  let mass = float.random(2, 15); // this is gonna determine how big the snowflake is
+  //and which will also determine how fast it will fall
+  let speed = 15 + mass;
+  let direction = random([-0.3, 0.3]); // snowflakes will either fall right way or left way slanted
+
+  
+  let sn = new Snowflake(xAxis, yAxis, mass, speed, direction);
+  sn.fall;
+  
+
 }
 
-const Snowflake = {
 
-  xAxis = float.random(0, width),
-  yAxis = float.random(-25, -5),
-  mass = float.random(2, 15), // this is gonna determine how big the snowflake is
-  //and which will also determine how fast it will fall
-  speed = 15 + mas,
-  direction = random([-0.3, 0.3]), // snowflakes will either fall right way or left way slanted
 
-  fall : function(){
-    //ellipse(xAxis + direction, yAxis - speed, mass, mass);
-    ellipse(50, 50, 50, 50);
+
+class Snowflake{
+  constructor(x, y, m, s, d){
+    this.xAxis = x;
+    this.yAxis = y;
+    this.mass = m;
+    this.speed = s;
+    this.direction = d;
   }
 
-
-
+  fall(){
+    ellipse(50, 50, 50, 50);
+  }
 }
 
 
